@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Voice Recognition Example</title>
+</head>
+
+<body>
+    <h1>Voice Recognition Example</h1>
+    <p id="output"></p>
+
+    <button onclick="startListening()">Start Listening</button>
+
+    <script>
+        function startListening() {
+            var recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onresult = function (event) {
+                var result = event.results[0][0].transcript;
+                document.getElementById('output').textContent = result;
+            }
+
+            recognition.start();
+        }
+    </script>
+</body>
+
+</html>
